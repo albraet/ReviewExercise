@@ -2,6 +2,7 @@ package com.servlets;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -41,13 +42,15 @@ public class Home extends HttpServlet {
       }
       // display file content
       out.println("<div>" + sb.toString() + "</div>");
+    } catch (FileNotFoundException e) {
+      out.println("<div>Please add a db.properties file to your `src/main/resources`</div>");
     } catch (Exception e) {
       e.printStackTrace();
     }
     out.close();
   }
 
-  private static Boolean logToDB(String info) {
+  private static Boolean logToDB(String info) throws FileNotFoundException {
     String QUERY = "insert into review_exercise_ values(?)";
     try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(QUERY)) {
       stmt.setString(1, info);
