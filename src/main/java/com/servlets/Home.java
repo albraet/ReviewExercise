@@ -32,8 +32,9 @@ public class Home extends HttpServlet {
 
       // return content to client
       response.setContentType("text/html");
+      out.print("<style>body {background:#333;color:#eee;}</style>");
       out.print("<div>hello</div>");
-      out.println("<br/>");
+      out.print("<br/>");
 
       // read in the file, append the bytes to StringBuilder
       StringBuilder sb = new StringBuilder();
@@ -41,7 +42,10 @@ public class Home extends HttpServlet {
         sb.append((char) bis.read());
       }
       // display file content
-      out.println("<div>" + sb.toString() + "</div>");
+      out.print("<div>" + sb.toString() + "</div>");
+      out.print("<br/>");
+      out.print("<br/>");
+      out.print("<h2>You are connected from " + request.getRemoteHost() + "</h2>");
     } catch (FileNotFoundException e) {
       out.println("<div>Please add a db.properties file to your `src/main/resources`</div>");
     } catch (Exception e) {

@@ -24,8 +24,7 @@ public class DBConnection {
     if (url == null) {
       throw new FileNotFoundException();
     }
-    try {
-      FileInputStream dbProps = new FileInputStream(url.getFile());
+    try (FileInputStream dbProps = new FileInputStream(url.getFile())){
       props.load(dbProps);
       Class.forName(props.getProperty("DB_DRIVER_CLASS"));
 
