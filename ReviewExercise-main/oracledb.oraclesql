@@ -1,0 +1,6 @@
+SELECT * FROM USER_TABLES;
+CREATE TABLE review_exercise_ (
+  log VARCHAR2(20)
+);
+select * from review_exercise_;
+truncate table review_exercise_;
